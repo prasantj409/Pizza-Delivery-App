@@ -92,6 +92,12 @@ class CheckOut extends Component {
                 value.length == 0 > 0 
                 ? "address required" 
                 : "";
+                break; 
+            case "address1":
+                formErrors.address1 = 
+                value.length == 0 > 0 
+                ? "address required" 
+                : "";
                 break;            
             default:
                 break;
@@ -113,7 +119,7 @@ class CheckOut extends Component {
             obj.fname = this.state.fname;
             obj.lname=this.state.lname;
             obj.phone=this.state.phone;
-            obj.email = this.state.fname;
+            obj.email = this.state.email;
             obj.address1 = this.state.address1;
             obj.city=this.state.city;
             obj.state=this.state.state;

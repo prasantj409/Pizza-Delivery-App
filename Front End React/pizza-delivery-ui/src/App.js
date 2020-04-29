@@ -66,8 +66,9 @@ class App extends Component{
       cartItems.push({...pizza, quantity:1});
     }
 
-    localStorage.removeItem("cartItems");    
-    this.setState({cartItems : cartItems}); 
+     
+    this.setState({cartItems : cartItems});
+    localStorage.setItem("cartItems",JSON.stringify(cartItems));  
     e.preventDefault();
   }
 
@@ -110,7 +111,7 @@ class App extends Component{
     localStorage.setItem("cartItems",JSON.stringify(cartItems));
      
   }
-  
+
   render(){
     const {pizzas,cartItems, displayLoader} = this.state;
     return (
