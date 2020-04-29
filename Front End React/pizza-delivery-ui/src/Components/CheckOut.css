@@ -1,0 +1,18 @@
+.ckeckout-container
+{
+    background-color: lightyellow;
+}
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; 
+    margin-top: -32px; 
+}
+
+.hidden{display: none;}
+.show{display: block;}
+
+.message-color{color:maroon;}
+.errorMessage{color:red;}
