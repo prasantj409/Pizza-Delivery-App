@@ -41,7 +41,8 @@ class CheckOut extends Component {
             formErrors : {fname : "", lname:"",phone:"",email:"",address1:"",city:""},
             postMessage : null,
             displayLoader : false,
-            errorMessage : null
+            errorMessage : null,
+            delivery_cost : 5
          }
         
     }
@@ -124,6 +125,7 @@ class CheckOut extends Component {
             obj.city=this.state.city;
             obj.state=this.state.state;
             obj.zip = this.state.zip;
+            obj.delivery_cost = this.state.delivery_cost;
             obj.pizza = [];
 
             this.state.pizzas.forEach(pizza=>{
@@ -158,7 +160,7 @@ class CheckOut extends Component {
     };
     
     render() {
-        const {formErrors,pizzas,displayLoader} = this.state;
+        const {formErrors,pizzas,displayLoader,delivery_cost} = this.state;
         let totalPrice = 0;
         let totalCount = 0;
         if(pizzas != null){
@@ -278,16 +280,41 @@ class CheckOut extends Component {
                                 
                             </div>
                         </div>
+                       
                         <br/>
                         <div class="row">                            
                             <div class="col-md-5">
-                                <b>Total Price : </b>
+                                <b>Price : </b>
                             </div>
                             <div class="col-md-2">
                                 {formatEuro(totalPrice)}
                             </div>
                             <div class="col-md-2">
                                 {GetDollar(totalPrice)}
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">                            
+                            <div class="col-md-5">
+                                <b>Delivery Cost :</b>
+                            </div>
+                            <div class="col-md-2">
+                                {formatEuro(delivery_cost)}
+                            </div>
+                            <div class="col-md-2">
+                            {GetDollar(delivery_cost)}
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">                            
+                            <div class="col-md-5">
+                                <b>Total Price : </b>
+                            </div>
+                            <div class="col-md-2 text-success">
+                                {formatEuro(totalPrice + delivery_cost)}
+                            </div>
+                            <div class="col-md-2 text-success">
+                                {GetDollar(totalPrice + delivery_cost)}
                             </div>
                         </div>
                         <br/>

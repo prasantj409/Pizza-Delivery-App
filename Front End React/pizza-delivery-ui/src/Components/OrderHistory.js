@@ -36,8 +36,17 @@ class OrderHistory extends Component {
 
         
 
-        const abc = OrderData.map(item=>(
-            
+        const getTotalPrice = pizzas =>{
+            let totalPrice = 0; 
+            pizzas.map(pizza=>{
+                totalPrice = totalPrice + pizza.price * pizza.pivot.quantity;
+            })
+
+            return totalPrice;
+        }
+
+        const abc = OrderData.map(item=>
+                    
             <tr>
                             <td>{item.id}</td>
                             <td>{new Date( item.created_at).toLocaleDateString()}</td>
@@ -46,23 +55,26 @@ class OrderHistory extends Component {
                             <td>{item.customer.phone}</td>
                             <td>{item.customer.email}</td>
                             <td>{item.customer.address1}</td>
-                            <td>{item.customer.city}</td>
-                            <td>
-                                
-                                {item.pizza.map(pizza=>(
+                            <td>{item.customer.city}</td>                           
+                            <td>                               
+                                {item.pizza.map(pizza=>( 
                                     <div>
                                         <div>{pizza.name}, Qty: {pizza.pivot.quantity}, 
                                             Price: <b>{formatEuro( pizza.price * pizza.pivot.quantity)}</b>
+                                            
                                         </div>
                                         {/* <div><b>Qty:</b> {pizza.pivot.quantity}</div>
                                         <div><b>Price:</b> {formatEuro( pizza.price * pizza.pivot.quantity)}</div> */}
                                     </div>
                                 ))}
-                                
-                            </td>                            
+                    
+                            </td>
+                            <td> {formatEuro(item.delivery_cost)} </td>   
+                                    <td><b>{formatEuro(item.delivery_cost + getTotalPrice(item.pizza))}<br/>
+                                    {GetDollar(item.delivery_cost + getTotalPrice(item.pizza))}</b></td>                         
                         </tr>
             
-        ))
+            )
         
         return (            
             <div>
@@ -82,8 +94,10 @@ class OrderHistory extends Component {
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th>City</th>
-                        <th>Order Detail</th>                        
+                        <th>City</th>                        
+                        <th>Order Detail</th> 
+                        <th>Del. Cost</th>
+                        <th>Total Price</th>                       
                     </tr>
                     {abc}
                 </table> 
